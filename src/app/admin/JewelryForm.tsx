@@ -6,6 +6,12 @@ import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
 import { JEWELRY_CATEGORIES, type Jewelry } from "@/lib/types";
 
+function formatDecimal(value: string): string {
+  const parsed = Number(value.replace(",", "."));
+  if (value.trim() === "" || Number.isNaN(parsed)) return value;
+  return parsed.toFixed(2).replace(".", ",");
+}
+
 export default function JewelryForm({
   initialData,
 }: {
@@ -24,10 +30,12 @@ export default function JewelryForm({
   );
   const [supplier, setSupplier] = useState(initialData?.supplier ?? "");
   const [price, setPrice] = useState(
-    initialData ? String(initialData.price) : ""
+    initialData ? formatDecimal(String(initialData.price)) : ""
   );
   const [costPrice, setCostPrice] = useState(
-    initialData?.cost_price != null ? String(initialData.cost_price) : ""
+    initialData?.cost_price != null
+      ? formatDecimal(String(initialData.cost_price))
+      : ""
   );
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(
@@ -195,6 +203,7 @@ export default function JewelryForm({
               inputMode="decimal"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+              onBlur={() => setPrice((current) => formatDecimal(current))}
               placeholder="0,00"
               className={`mt-1 w-full rounded-lg border bg-background px-3 py-2 outline-none ${
                 isPriceBelowCost
@@ -218,6 +227,7 @@ export default function JewelryForm({
               inputMode="decimal"
               value={costPrice}
               onChange={(e) => setCostPrice(e.target.value)}
+              onBlur={() => setCostPrice((current) => formatDecimal(current))}
               placeholder="0,00"
               className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-foreground outline-none focus:border-gold"
             />
