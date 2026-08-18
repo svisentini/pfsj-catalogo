@@ -36,6 +36,16 @@ export default function JewelryForm({
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const parsedPriceValue = Number(price.replace(",", "."));
+  const parsedCostPriceValue = costPrice.trim()
+    ? Number(costPrice.replace(",", "."))
+    : null;
+  const isPriceBelowCost =
+    parsedCostPriceValue != null &&
+    !Number.isNaN(parsedPriceValue) &&
+    !Number.isNaN(parsedCostPriceValue) &&
+    parsedPriceValue < parsedCostPriceValue;
+
   function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0] ?? null;
     setImageFile(file);
@@ -186,8 +196,17 @@ export default function JewelryForm({
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               placeholder="0,00"
-              className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-foreground outline-none focus:border-gold"
+              className={`mt-1 w-full rounded-lg border bg-background px-3 py-2 outline-none ${
+                isPriceBelowCost
+                  ? "border-red-500 text-red-600 focus:border-red-500"
+                  : "border-border text-foreground focus:border-gold"
+              }`}
             />
+            {isPriceBelowCost && (
+              <p className="mt-1 text-xs text-red-600">
+                Preço de venda menor que o preço de custo.
+              </p>
+            )}
           </div>
 
           <div>
