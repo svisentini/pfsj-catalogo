@@ -133,6 +133,19 @@ export default function JewelryForm({
           </div>
 
           <div>
+            <label htmlFor="description" className="block text-sm text-muted">
+              Descrição
+            </label>
+            <textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={4}
+              className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-foreground outline-none focus:border-gold"
+            />
+          </div>
+
+          <div>
             <label htmlFor="category" className="block text-sm text-muted">
               Categoria
             </label>
@@ -151,19 +164,6 @@ export default function JewelryForm({
           </div>
 
           <div>
-            <label htmlFor="material" className="block text-sm text-muted">
-              Material
-            </label>
-            <input
-              id="material"
-              value={material}
-              onChange={(e) => setMaterial(e.target.value)}
-              placeholder="Ex: Ouro 18k, Prata, Platina"
-              className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-foreground outline-none focus:border-gold"
-            />
-          </div>
-
-          <div>
             <label htmlFor="supplier" className="block text-sm text-muted">
               Fornecedor
             </label>
@@ -177,7 +177,7 @@ export default function JewelryForm({
 
           <div>
             <label htmlFor="price" className="block text-sm text-muted">
-              Preço (R$)
+              Preço de Venda (R$)
             </label>
             <input
               id="price"
@@ -205,17 +205,19 @@ export default function JewelryForm({
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-sm text-muted">
-              Descrição
+            <label htmlFor="material" className="block text-sm text-muted">
+              Material
             </label>
-            <textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              rows={4}
+            <input
+              id="material"
+              value={material}
+              onChange={(e) => setMaterial(e.target.value)}
+              placeholder="Ex: Ouro 18k, Prata, Platina"
               className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-foreground outline-none focus:border-gold"
             />
           </div>
+
+
         </div>
 
         <div>
