@@ -108,7 +108,11 @@ export default async function AdminPage({
               <p className="text-xs uppercase tracking-wider text-gold-soft">
                 Categoria: {item.category}
               </p>
-              <p className="text-sm text-muted">
+              <p
+                className={`text-sm ${
+                  isBelowCost ? "text-red-600" : "text-muted"
+                }`}
+              >
                 Preço de Venda: {currency.format(item.price)}
               </p>
               <p className="text-xs text-muted/70">
