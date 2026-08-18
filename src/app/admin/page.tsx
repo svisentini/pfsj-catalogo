@@ -67,7 +67,11 @@ export default async function AdminPage({
       )}
 
       <div className="mt-8 divide-y divide-border rounded-2xl border border-border bg-card">
-        {jewelry?.map((item) => (
+        {jewelry?.map((item) => {
+          const isBelowCost =
+            item.cost_price != null && item.price < item.cost_price;
+
+          return (
           <div
             key={item.id}
             className="flex items-center gap-4 p-4 sm:p-5"
@@ -89,10 +93,18 @@ export default async function AdminPage({
             </div>
 
             <div className="min-w-0 flex-1">
-              <p className="truncate font-medium text-foreground">
+
+
+              <p
+                className={`truncate font-medium ${
+                  isBelowCost ? "text-red-600" : "text-foreground"
+                }`}
+              >
                 {item.code}
                 {item.description ? ` - ${item.description}` : ""}
               </p>
+
+              
               <p className="text-xs uppercase tracking-wider text-gold-soft">
                 Categoria: {item.category}
               </p>
@@ -117,7 +129,8 @@ export default async function AdminPage({
               <DeleteButton id={item.id} code={item.code} />
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
