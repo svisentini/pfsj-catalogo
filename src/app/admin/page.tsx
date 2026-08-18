@@ -94,13 +94,13 @@ export default async function AdminPage({
                 {item.description ? ` - ${item.description}` : ""}
               </p>
               <p className="text-xs uppercase tracking-wider text-gold-soft">
-                {item.category}
+                Categoria: {item.category}
               </p>
               <p className="text-sm text-muted">
-                Preço: {currency.format(item.price)}
+                Preço de Venda: {currency.format(item.price)}
               </p>
               <p className="text-xs text-muted/70">
-                Custo:{" "}
+                Preço de Custo:{" "}
                 {item.cost_price != null
                   ? currency.format(item.cost_price)
                   : "—"}
