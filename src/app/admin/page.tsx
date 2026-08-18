@@ -42,7 +42,7 @@ export default async function AdminPage({
     <div>
       <div className="flex items-center justify-between">
         <h1 className="font-serif text-2xl text-foreground">
-          Joias cadastradas
+          Jóias cadastradas
         </h1>
         <Link
           href="/admin/nova"
